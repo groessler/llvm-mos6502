@@ -1,0 +1,11 @@
+Notes:
+
+Errata/Confusion:
+ General:
+  01) There isn't a lot of rationale for what functions I'm implementing. I'm blindly following along here
+ Target Machine:
+  No idea about ABI definitions when running on raw hardware. There should be no ABI right?
+ Target Registration:
+  01) Lack of "LLVMInitializeSparcTargetInfo" in MSP430 code. Missing function
+  02) Not clear where the LLVMInitializeSparcTargetInfo function goes
+  03) 
