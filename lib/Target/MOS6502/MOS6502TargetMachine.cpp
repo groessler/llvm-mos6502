@@ -1,4 +1,28 @@
-namespace llvm {
+#include "MOS6502TargetMachine.h"
+
+using namespace llvm;
+
+extern "C" void LLVMInitializeMOS6502Target() {
+  // Register the target.
+  RegisterTargetMachine<MOS6502TargetMachine> X(TheMOS6502Target);
+}
+
+extern "C" void LLVMInitializeSparcAsmPrinter() {
+  // Register printing assembly code.
+  // FIXME: Implement this goodness
+  // RegisterAsmPrinter<SparcAsmPrinter> X(TheSparcTarget);
+}
+
+MOS6502TargetMachine::MOS6502TargetMachine(const Target &T, StringRef TT,
+      StringRef CPU, StringRef FS,
+      const TargetOptions &Options,
+      Reloc::Model RM, CodeModel::Model CM,
+      CodeGenOpt::Level OL)
+    : LLVMTargetMachine(T, TT, CPU, FS, Options, RM, CM, OL),
+    Subtarget(TT, CPU, FS, *this) {
+  initAsmInfo();
+}
+
 
 MOS6502TargetMachine::MOS6502TargetMachine(const Module &M, const std::string &FS)
   // FIXME: No idea about the ABI alignment of the C64 kernel. Guessing 8 for now.
